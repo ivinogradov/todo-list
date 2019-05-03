@@ -3,6 +3,9 @@
   "description": "TODO list in polymer 3",
   "main": "todo-element.js",
   "dependencies": {
+    "@polymer/paper-button": "^3.0.1",
+    "@polymer/paper-checkbox": "^3.1.0",
+    "@polymer/paper-input": "^3.0.2",
     "@polymer/polymer": "^3.0.0"
   },
   "devDependencies": {
