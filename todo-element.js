@@ -32,7 +32,9 @@ class TodoElement extends PolymerElement {
 
         <dom-repeat
           items={{tasks}}
-          as="task">
+          as="task"
+          filter="isNotDone"
+          observe="done">
 
           <template>
             <div class="task">
@@ -45,6 +47,20 @@ class TodoElement extends PolymerElement {
         <paper-button on-click="addTask">Add Task</paper-button>
 
         <h4>[[sub]]</h4>
+
+        <dom-repeat
+          items={{tasks}}
+          as="task"
+          filter="isDone"
+          observe="done">
+
+          <template>
+            <div class="task">
+              <paper-checkbox checked="{{task.done}}"></paper-checkbox>
+              <paper-input label="Task:" value="{{task.task}}"></paper-input>
+            </div>
+          </template>
+        </dom-repeat>
       </div>
     `;
   }
@@ -60,7 +76,7 @@ class TodoElement extends PolymerElement {
       },
       tasks: {
         type: Array,
-        value: () => [{ done: true, task: 'Add a task'}]
+        value: () => [{ done: false, task: 'Add a task'}]
       }
     };
   }
@@ -70,7 +86,15 @@ class TodoElement extends PolymerElement {
       done: false,
       task: ''
     };
-    this.push('tasks', "task");
+    this.push('tasks', oTask);
+  }
+
+  isNotDone(oTask) {
+    return !oTask.done;
+  }
+
+  isDone(oTask) {
+    return oTask.done;
   }
 }
 
