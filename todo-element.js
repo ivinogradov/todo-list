@@ -1,4 +1,7 @@
 import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
+import '@polymer/paper-button/paper-button';
+import '@polymer/paper-checkbox/paper-checkbox';
+import '@polymer/paper-input/paper-input';
 
 /**
  * `todo-element`
@@ -16,15 +19,29 @@ class TodoElement extends PolymerElement {
           display: block;
         }
       </style>
-      <h2>Hello [[prop1]]!</h2>
+      <h2>[[name]]</h2>
+      <dive class="todo-list">
+        <div class="task">
+          <paper-checkbox></paper-checkbox>
+          <paper-input label="Task:"></paper-input>
+        </div>
+
+        <paper-button>Add Task</paper-button>
+
+        <h4>[[sub]]</h4>
+      </div>
     `;
   }
   static get properties() {
     return {
-      prop1: {
+      name: {
         type: String,
-        value: 'todo-element',
+        value: 'Todo list',
       },
+      sub: {
+        type: String,
+        value: 'Completed:'
+      }
     };
   }
 }
