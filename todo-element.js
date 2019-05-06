@@ -2,6 +2,7 @@ import {html, PolymerElement} from '@polymer/polymer/polymer-element.js';
 import '@polymer/paper-button/paper-button';
 import '@polymer/paper-checkbox/paper-checkbox';
 import '@polymer/paper-input/paper-input';
+import '@polymer/polymer/lib/elements/dom-repeat'
 
 /**
  * `todo-element`
@@ -21,10 +22,18 @@ class TodoElement extends PolymerElement {
       </style>
       <h2>[[name]]</h2>
       <dive class="todo-list">
-        <div class="task">
-          <paper-checkbox></paper-checkbox>
-          <paper-input label="Task:"></paper-input>
-        </div>
+
+        <dom-repeat
+          items={{tasks}}
+          as="task">
+
+          <template>
+            <div class="task">
+              <paper-checkbox></paper-checkbox>
+              <paper-input label="Task:" value="[[task]]"></paper-input>
+            </div>
+          </template>
+        </dom-repeat>
 
         <paper-button>Add Task</paper-button>
 
@@ -41,6 +50,10 @@ class TodoElement extends PolymerElement {
       sub: {
         type: String,
         value: 'Completed:'
+      },
+      tasks: {
+        type: Array,
+        value: () => ['task1', 'task2', 'task3']
       }
     };
   }
