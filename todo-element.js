@@ -19,6 +19,13 @@ class TodoElement extends PolymerElement {
         :host {
           display: block;
         }
+        .task {
+          display: flex;
+          align-items: center;
+        }
+        paper-input: {
+          display: inline-block;
+        }
       </style>
       <h2>[[name]]</h2>
       <dive class="todo-list">
@@ -29,13 +36,13 @@ class TodoElement extends PolymerElement {
 
           <template>
             <div class="task">
-              <paper-checkbox></paper-checkbox>
-              <paper-input label="Task:" value="[[task]]"></paper-input>
+              <paper-checkbox checked="{{task.done}}"></paper-checkbox>
+              <paper-input label="Task:" value="{{task.task}}"></paper-input>
             </div>
           </template>
         </dom-repeat>
 
-        <paper-button>Add Task</paper-button>
+        <paper-button on-click="addTask">Add Task</paper-button>
 
         <h4>[[sub]]</h4>
       </div>
@@ -53,9 +60,17 @@ class TodoElement extends PolymerElement {
       },
       tasks: {
         type: Array,
-        value: () => ['task1', 'task2', 'task3']
+        value: () => [{ done: true, task: 'Add a task'}]
       }
     };
+  }
+
+  addTask() {
+    var oTask = {
+      done: false,
+      task: ''
+    };
+    this.push('tasks', "task");
   }
 }
 
